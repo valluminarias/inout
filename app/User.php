@@ -36,4 +36,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function todayLatestAttendance()
+    {
+        return optional(
+            $this->attendance()
+                ->today()
+                ->latest()
+                ->first()
+        );
+    }
+
+    public function hasCheckedIn()
+    {
+        return $this->todayLatestAttendance()->type == 'in';
+    }
+
+    public function hasCheckedOut()
+    {
+        return $this->todayLatestAttendance()->type == 'out';
+    }
+
 }
