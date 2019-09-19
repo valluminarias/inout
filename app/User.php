@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\AttendanceType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,12 +55,12 @@ class User extends Authenticatable
 
     public function hasCheckedIn()
     {
-        return $this->todayLatestAttendance()->type == 'in';
+        return $this->todayLatestAttendance()->type == AttendanceType::CHECK_IN;
     }
 
     public function hasCheckedOut()
     {
-        return $this->todayLatestAttendance()->type == 'out';
+        return $this->todayLatestAttendance()->type == AttendanceType::CHECK_OUT;
     }
 
 }

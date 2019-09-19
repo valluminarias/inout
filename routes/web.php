@@ -12,6 +12,7 @@
 */
 
 use App\Attendance;
+use App\Enums\AttendanceType;
 
 Route::group([
     'middleware' => 'auth',
@@ -29,7 +30,7 @@ Route::group([
         request()->user()->can('checkIn', Attendance::class);
 
         $attendance = request()->user()->attendance()->create([
-            'type' => 'in',
+            'type' => AttendanceType::CHECK_IN,
             'log' => now()->toDateTimeString(),
         ]);
 
@@ -40,7 +41,7 @@ Route::group([
         request()->user()->can('checkOut', Attendance::class);
 
         $attendance = request()->user()->attendance()->create([
-            'type' => 'out',
+            'type' => AttendanceType::CHECK_OUT,
             'log' => now()->toDateTimeString(),
         ]);
 
