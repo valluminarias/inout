@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Attendance;
+use App\Observers\AttendanceObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Attendance::observe(AttendanceObserver::class);
     }
 }
