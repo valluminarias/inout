@@ -12,7 +12,8 @@ class AttendancePolicy
 
     public function checkIn(User $user)
     {
-        return ! $user->hasCheckedIn();
+        return ! $user->hasCheckedIn()
+            && ! $user->checkedToday();
     }
 
     public function checkOut(User $user)

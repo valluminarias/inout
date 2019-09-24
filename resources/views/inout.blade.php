@@ -12,6 +12,12 @@
         {{ Session::get('message') }}
     </div>
     @endif
+    
+    @if(Auth::user()->checkedToday())
+        <div class="py-4 px-6 text-center bg-blue-500 text-red-800 mb-8 rounded">
+            Check In Again for Tomorrow
+        </div>
+    @endif
 
     <div class="flex">
         @can('checkIn', App\Attendance::class)

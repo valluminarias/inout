@@ -63,4 +63,9 @@ class User extends Authenticatable
         return $this->todayLatestAttendance()->type == AttendanceType::CHECK_OUT;
     }
 
+    public function checkedToday()
+    {
+        return $this->attendance()->today()->whereIn('type', [AttendanceType::CHECK_IN, AttendanceType::CHECK_OUT])->count() >= 2;
+    }
+
 }
