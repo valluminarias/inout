@@ -13,6 +13,7 @@
 
 use App\Attendance;
 use App\Enums\AttendanceType;
+use Illuminate\Support\Str;
 
 Route::group([
     'middleware' => 'auth',
@@ -47,6 +48,24 @@ Route::group([
 
         return back()->with('message', 'You have checked out successfully.');
     });
+
+    Route::get('/attendance', function () {
+        $attendances = Attendance::orderBy('log', 'desc')->cursor();
+
+        $attendances = $attendances->mapToGroups (function ($item, $key) {
+            return [$item->log->toDateString() => $item];
+        })->map(function ($item) {
+            return $item->keyBy(function ($i) {
+                return Str::lower($i->type);
+            });
+        });
+
+        // dd($attendances->first()->all());
+
+        return view('attendance', [
+            'attendances' => $attendances,
+        ]);
+    })->name('attendance');
 
 });
 

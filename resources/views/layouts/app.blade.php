@@ -22,6 +22,14 @@
                             {{ config('app.name', 'Laravel') }}
                         </a>
                     </div>
+                    
+                    @auth()
+                    <div class="flex flex-1">
+                        <a href="{{ route('attendance') }}"
+                        class="no-underline hover:underline text-gray-300 text-sm p-3">{{ __('Your Attendance') }}</a>
+                    </div>
+                    @endauth
+                    
                     <div class="flex-1 text-right">
                         @guest
                             <a class="no-underline hover:underline text-gray-300 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
