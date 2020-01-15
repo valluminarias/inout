@@ -10,11 +10,11 @@
             </div>
             <div class="w-1/4">
                 IN
-                {{ $attendance->get('in')->log->toTimeString() }}
+                {{ $attendance->get('in') ? $attendance->get('in')->log->toTimeString() : '' }}
             </div>
             <div class="w-1/4">
                 OUT
-                {{ $attendance->get('out')->log->toTimeString() }}
+                {{ $attendance->get('out') ? $attendance->get('out')->log->toTimeString() : '' }}
             </div>
         </div>
     @endforeach
